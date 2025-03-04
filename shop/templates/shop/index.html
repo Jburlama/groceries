@@ -1,0 +1,58 @@
+{% extends './head.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<!--- Header --->
+{% include 'shop/header.html' %}
+
+<!-- Main section -->
+
+<div class="d-flex">
+    <!-- Sidebar -->
+	<!-- Filter Options (Left Side) -->
+	<div class="flex-shrink-0 p-3 bg-light border-end" style="width: 300px;">
+
+	    <!-- Search Bar -->
+		<form hx-get="{% url 'load_items' %}" hx-trigger="click" hx-target="#items" hx-swap="outerHTML" hx-on::after-request="if(event.detail.successful) this.reset()"
+			method="get"
+			class="input-group mb-3">
+		  	<input type="text" name="search" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2">
+		  	<button type="submit" class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+		</form>
+
+	
+	    <!-- Store Filter -->
+	    <h5 class="mb-3">Stores</h5>
+	    <div class="d-flex flex-column gap-2">
+			<button hx-get="{% url 'load_items' %}?store=continente" hx-trigger="click" hx-target="#items" hx-swap="outerHTML"
+				type="submit" class="btn btn-outline-primary" data-bs-toggle="button">Continente</button>
+			<button hx-get="{% url 'load_items' %}?store=pingodoce" hx-trigger="click" hx-target="#items" hx-swap="outerHTML"
+				type="button" class="btn btn-outline-primary" data-bs-toggle="button">Pingo Doce</button>
+			<button hx-get="{% url 'load_items' %}?store=minipreço" hx-trigger="click" hx-target="#items" HX-swap="outerHTML"
+				type="button" class="btn btn-outline-primary" data-bs-toggle="button">MinPreço</button>
+	    </div>
+	
+	    <!-- Category Filter -->
+	    <h5 class="mt-4 mb-3">Categories</h5>
+	    <div class="d-flex flex-column gap-2">
+			{% for section in sections %}
+
+			<button hx-get="{% url 'load_items' %}?category={{ section }}" hx-trigger="click" hx-target="#items" HX-swap="outerHTML"
+				type="button" class="btn btn-outline-primary" data-bs-toggle="button">{{ section|title }}</button>
+	
+			{% endfor %}
+	    </div>
+	</div>
+
+    <!-- Product Grid -->
+	<div class="container mt-4" style="margin-left: 80px;">
+   		<div class="row row-cols-1 row-cols-md-3 g-4">
+			{% include 'shop/items.html' %}
+    	</div>
+	</div>
+</div>
+
+{% endblock %}

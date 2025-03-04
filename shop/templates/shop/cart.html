@@ -1,0 +1,28 @@
+{% extends './head.html' %}
+{% load static %}
+
+{% block title %}Cart{% endblock %}
+
+{% block body %}
+
+<!--- Header --->
+<nav class="navbar navbar-expand-lg bg-light p-3">
+    <div class="container-fluid">
+        <!-- Logos on the Left -->
+        <div class="d-flex">
+            <img src="{% static 'imgs/logos/continente-logo.jpeg' %}" alt="continente-logo" class="img-fluid me-2" style="height: 70px;">
+            <img src="{% static 'imgs/logos/minipreco-logo.png' %}" alt="minipreço-logo" class="img-fluid me-2" style="height: 70px;">
+            <img src="{% static 'imgs/logos/pingodoce-logo.png' %}" alt="pingodoce-logo" class="img-fluid" style="height: 75px;">
+        </div>
+        
+        <!-- Navigation Buttons on the Right -->
+       	<div class="ms-auto d-flex">
+			<a href="/">
+       	    	 <button class="btn btn-success">Home</button>
+			</a>
+       	</div>
+    </div>
+</nav> 
+
+
+{% endblock %}

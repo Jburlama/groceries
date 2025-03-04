@@ -1,0 +1,24 @@
+{% load static %}
+
+{% if items %}
+{% for item in items %}
+	{% if forloop.last %}
+        <div id="items" class="col"
+		hx-get="{% url 'load_items' %}?page={{ items.next_page_number }}" hx-trigger="revealed" hx-swap="outerHTML">
+	{% else %}
+        <div id="items" class="col">
+	{% endif %}
+            <div class="card h-100 shadow-sm">
+                <img src="{% static 'items_img/' %}{{ item.img }}" class="card-img-top" alt="Product 1">
+                <div class="card-body">
+                    <h6 class="text-muted">{{ item.store|title }}</h6>
+                    <h5 class="card-title">{{ item.name|title }}</h5>
+                    <p class="card-text">{{ item.price }}€</p>
+
+					{% include 'shop/carts_dropdown.html' %}
+
+                </div>
+            </div>
+        </div>
+{% endfor %}
+{% endif %}

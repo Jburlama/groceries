@@ -1,0 +1,56 @@
+<div id="cart_dropdown" class="dropdown">
+   <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        Add to Cart
+    </button>
+	<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+	    <!-- Existing Carts -->
+		{% if carts %}
+		{% for cart in carts %}
+		
+			<table class="table table-primary">
+			  <tbody>
+			    <tr>
+			      <td>{{ cart.cart_name }}</td>
+			      <td>{{ cart.amount }}€</td>
+
+				  <td>
+               		 <button hx-get="{% url 'load_items' %}?add_to={{ cart.cart_name }}&item={{ item.name }}" hx-target="#items" hx-swap="outerHTML"
+						type="button" class="btn btn-outline-secondary">
+               		   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+  			   		   <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+  			   			  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+			   		   </svg>
+               		   <span class="visually-hidden">Button</span>
+               		 </button>
+		 		  </td>
+
+				  <td>
+               		 <button hx-get="{% url 'load_items' %}?delete={{ cart.cart_name }}" hx-target="#items" hx-swap="outerHTML"
+						type="button" class="btn btn-outline-secondary" type="submit" name="{{ cart.cart_name }}">
+               		   	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+  			   		 	<path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+			   		 	</svg>
+   	            		<span class="visually-hidden">Button</span>
+               		 </button>
+		 		  </td>
+
+			    </tr>
+			  </tbody>
+			</table>
+
+		{% endfor %}
+		{% endif %}
+	
+	    <!-- Divider -->
+	    <li><hr class="dropdown-divider"></li>
+	
+	    <!-- Option to Create a New Cart -->
+		<form class="input-group mb-3" method="get"
+			hx-on::after-request="if(event.detail.successful) this.reset()"
+			hx-get="{% url 'load_items' %}" hx-target="#items" hx-swap="outerHTML">
+		  	<input type="text" name="create_cart" class="form-control" placeholder="Create" aria-label="Recipient's username" aria-describedby="button-addon2">
+		  	<button type="submit" class="btn btn-outline-secondary" id="button-addon2">Add Cart</button>
+		</form>
+	
+	</ul>
+</div>

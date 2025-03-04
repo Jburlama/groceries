@@ -1,0 +1,31 @@
+ngo #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+csv
+imgs
+items_img
+
+# Installer logs 
+pip-log.txt 
+pip-delete-this-directory.txt 
+
+
+# pyenv 
+.python-version 
+
+# Environments 
+.env 
+.venv 
+env/ 
+venv/ 
+ENV/ 
+env.bak/ 
+venv.bak/ 
+
+# mypy 
+.mypy_cache/ 
+
