@@ -14,8 +14,3 @@ HTMX - for the front end.
 
 https://github.com/user-attachments/assets/de6ec1a0-90ce-4482-847e-4309df2c4828
 
-
-
-[!NOTE]
-
-The database and images are not included in this repo
